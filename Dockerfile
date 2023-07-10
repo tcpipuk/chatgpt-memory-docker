@@ -5,7 +5,7 @@ FROM python:3.11-alpine AS builder
 WORKDIR /build
 
 # Install build dependencies
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev rust cargo
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev rust cargo pkgconfig openssl-dev
 
 # Install the package
 RUN pip install --no-cache-dir --prefix=/install chatgpt-memory
