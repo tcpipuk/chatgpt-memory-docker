@@ -1,11 +1,11 @@
 version: '3'
 services:
   app:
-    build: .
-    links:
-      - redis
+    image: tcpipuk/chatgpt-memory:latest
     env_file:
       - .env
+    links:
+      - redis
   redis:
     image: "redis:alpine"
     ports:

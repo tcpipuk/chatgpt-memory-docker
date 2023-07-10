@@ -27,10 +27,10 @@ REDIS_PASSWORD=your-redis-password
 
 Replace `your-openai-api-key` and `your-redis-password` with your actual OpenAI API key and Redis password.
 
-3. Build and run the Docker containers:
+3. Run the Docker containers:
 
 ```bash
-docker-compose up --build
+docker-compose up
 ```
 
 This will start two Docker containers: one for the ChatGPT Memory application and one for the Redis service. Docker Compose will automatically link these two containers, and the application will be able to connect to the Redis service using the hostname `redis`.
@@ -38,6 +38,10 @@ This will start two Docker containers: one for the ChatGPT Memory application an
 ## Interacting with the Application
 
 Once the Docker containers are up and running, you can interact with the ChatGPT client in the terminal. The client will remember the context of the conversation using the Redis datastore.
+
+## Docker Image
+
+The Docker image for this project is automatically built and hosted on Docker Hub. You can find it at [tcpipuk/chatgpt-memory](https://hub.docker.com/r/tcpipuk/chatgpt-memory).
 
 ## License
 
