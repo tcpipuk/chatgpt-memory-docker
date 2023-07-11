@@ -15,7 +15,7 @@ RUN git clone https://github.com/continuum-llms/chatgpt-memory.git
 
 # Install the package
 WORKDIR /build/chatgpt-memory
-RUN poetry install --no-root
+RUN poetry install
 
 # Start a new stage for the final image
 FROM python:3.11-alpine
