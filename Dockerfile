@@ -32,8 +32,11 @@ COPY --from=builder /root/.cache/pypoetry/virtualenvs /root/.cache/pypoetry/virt
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Set the PATH environment variable to include Poetry
-ENV PATH="/root/.cache/pypoetry/virtualenvs/bin:${PATH}"
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Make the entrypoint script executable
+RUN chmod +x /entrypoint.sh
+
+# Run the entrypoint script when the container launches
+CMD ["/entrypoint.sh"]
