@@ -12,15 +12,14 @@ from chatgpt_memory.memory.manager import MemoryManager
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 REDIS_HOST = os.getenv("REDIS_HOST", "redis")
 REDIS_PORT = os.getenv("REDIS_PORT", 6379)
-REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD") or None
 
 # Create RedisDataStoreConfig with optional parameters
 redis_datastore_config_params = {
     "host": REDIS_HOST,
-    "port": REDIS_PORT
+    "port": REDIS_PORT,
+    "password": REDIS_PASSWORD,
 }
-if REDIS_PASSWORD:
-    redis_datastore_config_params["password"] = REDIS_PASSWORD
 
 redis_datastore_config = RedisDataStoreConfig(**redis_datastore_config_params)
 redis_datastore = RedisDataStore(config=redis_datastore_config)
