@@ -10,6 +10,9 @@ RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconf
 # Install Poetry
 RUN pip install --no-cache-dir poetry
 
+# Set environment variable to disable creation of virtualenvs
+ENV POETRY_VIRTUALENVS_CREATE=false
+
 # Clone the chatgpt-memory repository
 RUN git clone https://github.com/continuum-llms/chatgpt-memory.git
 
@@ -27,7 +30,7 @@ WORKDIR /app
 RUN apk add --no-cache libstdc++
 
 # Copy the installed package from the builder
-COPY --from=builder /root/.cache/pypoetry/virtualenvs /root/.cache/pypoetry/virtualenvs
+COPY --from=builder /usr/local /usr/local
 
 # Copy the current directory contents into the container at /app
 COPY . /app
