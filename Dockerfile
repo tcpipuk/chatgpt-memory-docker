@@ -5,10 +5,17 @@ FROM python:3.11-alpine AS builder
 WORKDIR /build
 
 # Install build dependencies
-RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconfig openssl-dev
+RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconfig openssl-dev git
+
+# Install Poetry
+RUN pip install --no-cache-dir poetry
+
+# Clone the chatgpt-memory repository
+RUN git clone https://github.com/continuum-llms/chatgpt-memory.git
 
 # Install the package
-RUN pip install --no-cache-dir --prefix=/install chatgpt-memory
+WORKDIR /build/chatgpt-memory
+RUN poetry install --no-root
 
 # Start a new stage for the final image
 FROM python:3.11-alpine
@@ -20,10 +27,13 @@ WORKDIR /app
 RUN apk add --no-cache libstdc++
 
 # Copy the installed package from the builder
-COPY --from=builder /install /usr/local
+COPY --from=builder /root/.cache/pypoetry/virtualenvs /root/.cache/pypoetry/virtualenvs
 
 # Copy the current directory contents into the container at /app
 COPY . /app
+
+# Set the PATH environment variable to include Poetry
+ENV PATH="/root/.cache/pypoetry/virtualenvs/bin:${PATH}"
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
