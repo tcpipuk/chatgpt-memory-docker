@@ -16,6 +16,9 @@ FROM python:3.11-alpine
 # Set work directory in the container
 WORKDIR /app
 
+# Install runtime dependencies
+RUN apk add --no-cache libstdc++
+
 # Copy the installed package from the builder
 COPY --from=builder /install /usr/local
 

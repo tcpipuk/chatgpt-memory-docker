@@ -4,9 +4,8 @@ services:
     image: tcpipuk/chatgpt-memory:latest
     env_file:
       - .env
-    links:
-      - redis
   redis:
+    container_name: ${REDIS_HOST}
     image: "redis:alpine"
     ports:
       - "6379:6379"
