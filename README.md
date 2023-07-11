@@ -27,17 +27,34 @@ REDIS_PASSWORD=your-redis-password
 
 Replace `your-openai-api-key` and `your-redis-password` with your actual OpenAI API key and Redis password.
 
-3. Run the Docker containers:
+## Running the Application
+
+You have two options to run the application:
+
+### Using Docker Compose
+
+To run the Docker containers using Docker Compose while interacting with the Python input lines, you can run the `app` service in the foreground:
 
 ```bash
-docker-compose up
+docker-compose run app
 ```
 
-This will start two Docker containers: one for the ChatGPT Memory application and one for the Redis service. Docker Compose will automatically link these two containers, and the application will be able to connect to the Redis service using the hostname `redis`.
+### Using Docker Run
 
-## Interacting with the Application
+Alternatively, you can use Docker run to start the application in interactive mode:
 
-Once the Docker containers are up and running, you can interact with the ChatGPT client in the terminal. The client will remember the context of the conversation using the Redis datastore.
+```bash
+docker network create chatgpt_network
+docker run --name redis --network chatgpt_network -d redis:alpine
+docker run -it --rm --name chatgpt_memory --network chatgpt_network --env-file .env tcpipuk/chatgpt-memory:latest
+```
+
+Then to stop and remove everything created:
+
+```bash
+docker stop chatgpt_memory redis
+docker network rm chatgpt_network
+```
 
 ## Docker Image
 
