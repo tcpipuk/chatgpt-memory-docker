@@ -35,11 +35,5 @@ COPY --from=builder /usr/local /usr/local
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Copy the entrypoint script into the container
-COPY entrypoint.sh /entrypoint.sh
-
-# Make the entrypoint script executable
-RUN chmod +x /entrypoint.sh
-
-# Run the entrypoint script when the container launches
-CMD ["/entrypoint.sh"]
+# Run app.py when the container launches
+CMD ["python", "app.py"]
