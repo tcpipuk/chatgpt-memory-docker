@@ -35,7 +35,7 @@ RUN apk add --no-cache --virtual .build-deps \
  && cd arrow/cpp \
  && mkdir release \
  && cd release \
- && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
+ && cmake -DARROW_CSV=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. \
  && make \
  && make install \
  && cd /build \
