@@ -5,23 +5,18 @@ FROM python:3.11-alpine AS builder
 WORKDIR /build
 
 # Install build dependencies
-RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconfig openssl-dev git
+RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconfig openssl-dev cmake git
 
-# Install Poetry
+# Install poetry
 RUN pip install --no-cache-dir poetry
-
-# Set environment variable to disable creation of virtualenvs
-ENV POETRY_VIRTUALENVS_CREATE=false
-
-# Copy the pyproject.toml file into the builder
-COPY pyproject.toml /build
 
 # Clone the chatgpt-memory repository
 RUN git clone https://github.com/continuum-llms/chatgpt-memory.git
 
-# Install the package
-WORKDIR /build/chatgpt-memory
-RUN poetry install
+# Set environment variable to disable creation of virtualenvs and install the package
+RUN poetry config virtualenvs.create false \
+    && cd chatgpt-memory \
+    && poetry install --no-interaction --no-ansi
 
 # Start a new stage for the final image
 FROM python:3.11-alpine
