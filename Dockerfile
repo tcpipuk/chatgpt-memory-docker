@@ -38,7 +38,6 @@ RUN apk add --no-cache --virtual .build-deps \
  && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
  && make \
  && make install \
- && export ARROW_HOME=/usr/local \
  && cd /build \
  && rm -rf arrow
 
@@ -47,6 +46,9 @@ RUN pip install --no-cache-dir poetry \
  && git clone https://github.com/continuum-llms/chatgpt-memory.git \
  && poetry config virtualenvs.create false \
  && cd chatgpt-memory \
+ && export ARROW_HOME=/usr/local \
+ && export CMAKE_INCLUDE_PATH=/usr/local/include \
+ && export CMAKE_LIBRARY_PATH=/usr/local/lib \
  && poetry install --no-interaction --no-ansi
 
 # Start a new stage for the final image
