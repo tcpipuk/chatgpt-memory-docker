@@ -16,9 +16,9 @@ RUN apk add --no-cache --virtual .build-deps \
     musl-dev \
     openssl-dev \
     pkgconfig \
+    poetry-pyc \
     py3-aiosignal-pyc \
     py3-dateutil-pyc \
-    py3-frozenlist-pyc \
     py3-greenlet-pyc \
     py3-multidict-pyc \
     py3-numpy-pyc \
@@ -31,8 +31,8 @@ RUN apk add --no-cache --virtual .build-deps \
     rust
 
 # Install poetry, clone the chatgpt-memory repository, and install the package
-RUN pip install --no-cache-dir poetry \
- && git clone https://github.com/continuum-llms/chatgpt-memory.git \
+# RUN pip install --no-cache-dir poetry \
+RUN git clone https://github.com/continuum-llms/chatgpt-memory.git \
  && poetry config virtualenvs.create false \
  && cd chatgpt-memory \
  && poetry install --no-interaction --no-ansi
