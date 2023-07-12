@@ -24,7 +24,18 @@ RUN apk add --no-cache --virtual .build-deps \
     openssl-dev \
     pkgconfig \
     protobuf \
+    py3-aiosignal \
+    py3-apache-arrow \
+    py3-dateutil \
+    py3-frozenlist \
+    py3-multidict \
+    py3-numpy \
+    py3-pandas \
     py3-pyarrow \
+    py3-tqdm \
+    py3-tzdata \
+    py3-yarl \
+    py3-zipp \
     rapidjson-dev \
     re2-dev \
     rust \
