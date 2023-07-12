@@ -5,7 +5,17 @@ FROM python:3.11-alpine AS builder
 WORKDIR /build
 
 # Install build dependencies
-RUN apk add --no-cache --virtual .build-deps gcc g++ musl-dev rust cargo pkgconfig openssl-dev cmake git
+RUN apk add --no-cache --virtual .build-deps \
+    cargo \
+    cmake \
+    gcc \
+    git \
+    g++ \
+    make \
+    musl-dev \
+    openssl-dev \
+    pkgconfig \
+    rust
 
 # Install poetry
 RUN pip install --no-cache-dir poetry
