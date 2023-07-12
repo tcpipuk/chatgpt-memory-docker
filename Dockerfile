@@ -35,9 +35,10 @@ RUN apk add --no-cache --virtual .build-deps \
  && cd arrow/cpp \
  && mkdir release \
  && cd release \
- && cmake -DARROW_CSV=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. \
+ && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
  && make \
  && make install \
+ && export ARROW_HOME=/usr/local \
  && cd /build \
  && rm -rf arrow
 
