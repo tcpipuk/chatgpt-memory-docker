@@ -6,7 +6,7 @@ WORKDIR /build
 
 # Install build dependencies and build Arrow
 RUN apk add --no-cache --virtual .build-deps \
-    apache-arrow \
+    apache-arrow-dev \
     cargo \
     cmake \
     g++ \
