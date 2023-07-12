@@ -23,7 +23,7 @@ RUN apk add --no-cache --virtual .build-deps \
     py3-multidict-pyc \
     py3-numpy-pyc \
     py3-pandas-pyc \
-    py3-pyarrow-pyc \
+    py3-pyarrow \
     py3-tqdm-pyc \
     py3-tzdata-pyc \
     py3-yarl-pyc \
