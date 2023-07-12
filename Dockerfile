@@ -16,7 +16,6 @@ RUN apk add --no-cache --virtual .build-deps \
     gflags-dev \
     git \
     glog-dev \
-    google-benchmark \
     gtest \
     lz4-dev \
     llvm-dev \
