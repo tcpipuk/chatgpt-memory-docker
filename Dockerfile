@@ -6,24 +6,15 @@ WORKDIR /build
 
 # Install build dependencies and build Arrow
 RUN apk add --no-cache --virtual .build-deps \
-    boost-dev \
-    brotli-dev \
     cargo \
     cmake \
-    curl-dev \
     g++ \
     gcc \
-    gflags-dev \
     git \
-    glog-dev \
-    gtest \
-    lz4-dev \
-    llvm-dev \
     make \
     musl-dev \
     openssl-dev \
     pkgconfig \
-    protobuf \
     py3-aiosignal \
     py3-apache-arrow \
     py3-dateutil \
@@ -36,22 +27,13 @@ RUN apk add --no-cache --virtual .build-deps \
     py3-tzdata \
     py3-yarl \
     py3-zipp \
-    rapidjson-dev \
-    re2-dev \
-    rust \
-    snappy-dev \
-    utf8proc \
-    zlib-dev \
-    zstd-dev
+    rust
 
 # Install poetry, clone the chatgpt-memory repository, and install the package
 RUN pip install --no-cache-dir poetry \
  && git clone https://github.com/continuum-llms/chatgpt-memory.git \
  && poetry config virtualenvs.create false \
  && cd chatgpt-memory \
- && export ARROW_HOME=/usr/local \
- && export CMAKE_INCLUDE_PATH=/usr/local/include \
- && export CMAKE_LIBRARY_PATH=/usr/local/lib \
  && poetry install --no-interaction --no-ansi
 
 # Start a new stage for the final image
