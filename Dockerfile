@@ -6,6 +6,7 @@ WORKDIR /build
 
 # Install build dependencies and build Arrow
 RUN apk add --no-cache --virtual .build-deps \
+    apache-arrow \
     cargo \
     cmake \
     g++ \
@@ -15,19 +16,18 @@ RUN apk add --no-cache --virtual .build-deps \
     musl-dev \
     openssl-dev \
     pkgconfig \
-    py3-aiosignal \
-    py3-apache-arrow \
-    py3-dateutil \
-    py3-frozenlist \
-    py3-greenlet \
-    py3-multidict \
-    py3-numpy \
-    py3-pandas \
-    py3-pyarrow \
-    py3-tqdm \
-    py3-tzdata \
-    py3-yarl \
-    py3-zipp \
+    py3-aiosignal-pyc \
+    py3-dateutil-pyc \
+    py3-frozenlist-pyc \
+    py3-greenlet-pyc \
+    py3-multidict-pyc \
+    py3-numpy-pyc \
+    py3-pandas-pyc \
+    py3-pyarrow-pyc \
+    py3-tqdm-pyc \
+    py3-tzdata-pyc \
+    py3-yarl-pyc \
+    py3-zipp-pyc \
     rust
 
 # Install poetry, clone the chatgpt-memory repository, and install the package
