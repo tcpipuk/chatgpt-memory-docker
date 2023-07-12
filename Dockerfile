@@ -24,22 +24,14 @@ RUN apk add --no-cache --virtual .build-deps \
     openssl-dev \
     pkgconfig \
     protobuf \
+    py3-pyarrow \
     rapidjson-dev \
     re2-dev \
     rust \
     snappy-dev \
     utf8proc \
     zlib-dev \
-    zstd-dev \
- && git clone https://github.com/apache/arrow.git \
- && cd arrow/cpp \
- && mkdir release \
- && cd release \
- && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
- && make \
- && make install \
- && cd /build \
- && rm -rf arrow
+    zstd-dev
 
 # Install poetry, clone the chatgpt-memory repository, and install the package
 RUN pip install --no-cache-dir poetry \
