@@ -19,6 +19,7 @@ RUN apk add --no-cache --virtual .build-deps \
     py3-apache-arrow \
     py3-dateutil \
     py3-frozenlist \
+    py3-greenlet \
     py3-multidict \
     py3-numpy \
     py3-pandas \
